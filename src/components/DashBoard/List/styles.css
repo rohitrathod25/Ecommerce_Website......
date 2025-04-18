@@ -1,0 +1,81 @@
+.list-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0rem; /* ✅ No extra gap */
+    margin: 0.1rem 0; /* ✅ Minimal vertical margin */
+    padding: 0.1rem 0; /* ✅ Minimal vertical padding */
+    border-radius: 0.5rem;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+    border: none;
+}
+
+.list-row:hover {
+    background-color: var(--darkgrey);
+    transform: scale(1.005); /* ✅ Subtle hover effect */
+}
+
+.list-row td {
+    text-align: left;
+    width: auto; /* ✅ Auto width for dynamic spacing */
+    border: none !important;
+    padding: 0.1rem 0.2rem; /* ✅ Further reduced padding */
+    font-size: 0.75rem; /* ✅ Smaller text for compact layout */
+}
+
+.td-image {
+    width: 1.2rem !important; /* ✅ Smaller icon */
+    min-width: 1.2rem;
+    margin-right: 0.1rem !important; /* ✅ Minimal spacing */
+    display: flex;
+    align-items: center;
+}
+
+.name-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* ✅ Proper alignment */
+    gap: 0rem; /* ✅ No extra space */
+    white-space: nowrap;
+}
+
+.coin-symbol {
+    font-size: 1.5rem; /* ✅ Smaller text */
+    font-weight: bold;
+    color: var(--lightgrey);
+    margin-bottom: -0.1rem; /* ✅ Almost no space */
+}
+
+.coin-name {
+    font-size: 1.3rem; /* ✅ Smaller text */
+    color: var(--grey);
+}
+
+.td-center-align {
+    text-align: center;
+}
+
+.td-right-align {
+    text-align: right;
+}
+
+/* Hide certain columns on smaller screens */
+@media only screen and (max-width: 800px) {
+    .td-icon,
+    .td-total-volume {
+        display: none;
+    }
+}
+
+/* Optimize table spacing */
+table {
+    border-collapse: collapse;
+    border: none;
+    width: 100%; /* ✅ Full width */
+}
+
+tr, td, th {
+    border: none !important;
+    padding: 0.05rem 0.1rem; /* ✅ Ultra-minimized padding */
+    font-size: 0.7rem; /* ✅ Compact text */
+}

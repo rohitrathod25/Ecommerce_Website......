@@ -1,0 +1,12 @@
+.coin-info-heading {
+    margin: rem;
+}
+
+.read-more {
+    color: var(--grey);
+    cursor: pointer;
+  }
+  .read-more:hover {
+    text-decoration: underline;
+  }
+  

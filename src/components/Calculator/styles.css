@@ -1,0 +1,890 @@
+/* Main Wrapper */
+.calculator-wrapper {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding: 2rem 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Calculator Container */
+.calculator-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Header Styles */
+.calculator-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: #111827;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.calculator-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+  border-radius: 2px;
+}
+
+/* Form Input Styles */
+.calculator-input-group {
+  margin-bottom: 1.75rem;
+}
+
+.calculator-label {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: #4b5563;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.calculator-input {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+.calculator-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  background-color: #ffffff;
+}
+
+/* Asset Selection Styles */
+.asset-section {
+  margin-bottom: 2.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.asset-selection-header {
+  padding: 1.25rem 1.5rem;
+  background: #f9fafb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.asset-selection-header:hover {
+  background-color: #f3f4f6;
+}
+
+.asset-selection-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: #111827;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropdown-icon {
+  font-size: 1rem;
+  color: #6b7280;
+  transition: transform 0.2s ease;
+}
+
+.asset-dropdown-content {
+  padding: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.selected-assets-container {
+  padding: 1.25rem 1.5rem;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+}
+
+.selected-assets-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.selected-asset-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f3f4f6;
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #374151;
+  transition: all 0.2s ease;
+}
+
+.selected-asset-item:hover {
+  background: #e5e7eb;
+}
+
+.no-asset-selected {
+  color: #9ca3af;
+  font-style: italic;
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.remove-asset {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0 0.25rem;
+  margin-left: 0.25rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.remove-asset:hover {
+  transform: scale(1.2);
+}
+
+/* Asset Card Styles */
+.asset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.asset-card {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.asset-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 0;
+  background: linear-gradient(to bottom, #3b82f6, #10b981);
+  transition: height 0.3s ease;
+}
+
+.asset-card:hover::before {
+  height: 100%;
+}
+
+.asset-card.selected {
+  border: 1px solid #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  background-color: #f0f9ff;
+}
+
+.asset-card.selected::before {
+  height: 100%;
+}
+
+.asset-card:hover:not(.selected) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.asset-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.stock-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.stock-icon-small {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.sip-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.sip-icon-small {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+.fd-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.fd-icon-small {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+.gold-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.gold-icon-small {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+.realestate-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.realestate-icon-small {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+.asset-name {
+  font-weight: 600;
+  color: #111827;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.asset-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.asset-price {
+  font-weight: 700;
+  color: #111827;
+  font-size: 1.15rem;
+}
+
+.asset-change {
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.asset-change.positive {
+  background-color: #ecfdf5;
+  color: #059669;
+}
+
+.asset-change.negative {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.asset-market-cap {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}
+
+.asset-category {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.asset-issuer {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.asset-type {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.asset-returns {
+  font-size: 0.95rem;
+  color: #111827;
+  font-weight: 600;
+}
+
+.asset-rate {
+  font-size: 0.95rem;
+  color: #111827; /* Changed from white to black */
+  font-weight: 600;
+}
+
+.asset-liquidity {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.pagination-controls button {
+  padding: 0.6rem 1.2rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pagination-controls button:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.pagination-controls button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.pagination-controls span {
+  color: #4b5563;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Loading Skeletons */
+.loading-skeleton {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.asset-card-skeleton {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  border-radius: 12px;
+  height: 140px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Button Styles */
+.calculator-button {
+  width: 100%;
+  padding: 1.1rem;
+  background: linear-gradient(to right, #3b82f6, #6366f1);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 1rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+}
+
+.calculator-button:hover {
+  background: linear-gradient(to right, #2563eb, #4f46e5);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+}
+
+.calculator-button:active {
+  transform: translateY(0);
+}
+
+.calculator-button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Results Section */
+.calculator-results {
+  margin-top: 3rem;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  animation: fadeIn 0.4s ease-out;
+  border: 1px solid #e5e7eb;
+}
+
+.results-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #111827;
+  font-size: 1.75rem;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.results-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+  border-radius: 2px;
+}
+
+.summary-card {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.summary-item span:first-child {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.summary-item span:last-child {
+  color: #111827;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.summary-item.highlight {
+  background: linear-gradient(135deg, #f0f9ff, #ecfdf5);
+  border: 1px solid #bfdbfe;
+}
+
+/* Table Styles */
+.calculator-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+}
+
+.calculator-table th {
+  background-color: #f3f4f6;
+  color: #111827;
+  font-weight: 700;
+  padding: 1.25rem;
+  text-align: left;
+  border-bottom: 2px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+}
+
+.calculator-table td {
+  padding: 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.calculator-table tr:last-child td {
+  border-bottom: none;
+}
+
+.calculator-table tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Asset Group Styles */
+.asset-group-header {
+  background: linear-gradient(to right, #f0f9ff, #ecfdf5);
+  font-weight: 700;
+  color: #1e40af;
+  padding: 1rem 1.25rem;
+  font-size: 1.05rem;
+  border-left: 4px solid #3b82f6;
+}
+
+.asset-plan-row td {
+  padding: 1rem 1.25rem;
+}
+
+.asset-plan-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.asset-plan-item img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
+}
+
+/* Toggle Button */
+.toggle-index-btn {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+}
+
+.toggle-index-btn:hover {
+  color: #2563eb;
+  background-color: #f0f9ff;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bank Name in Table */
+.bank-name {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+  font-weight: 400;
+}
+
+.issuer-name {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+  font-weight: 400;
+}
+
+.property-type {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+  font-weight: 400;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .calculator-container {
+    max-width: 95%;
+    padding: 2rem;
+  }
+  
+  .asset-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .calculator-container {
+    margin: 1rem auto;
+    padding: 1.75rem;
+    border-radius: 12px;
+  }
+  
+  .calculator-header {
+    font-size: 1.8rem;
+  }
+  
+  .asset-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .summary-card {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+
+  .calculator-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .calculator-table th,
+  .calculator-table td {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calculator-header {
+    font-size: 1.5rem;
+  }
+  
+  .results-header {
+    font-size: 1.3rem;
+  }
+  
+  .asset-selection-header h3 {
+    font-size: 1rem;
+  }
+  
+  .calculator-input {
+    padding: 0.9rem;
+  }
+  
+  .asset-card {
+    padding: 1.25rem;
+  }
+  
+  .pagination-controls {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .calculator-results {
+    padding: 1.5rem;
+  }
+  
+  .summary-item span:last-child {
+    font-size: 1.1rem;
+  }
+  
+  .asset-plan-item img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+
+
+
+/* Add these styles to your CSS file */
+.inflation-note {
+  background-color: #fff8e1;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #5d4037;
+}
+
+.inflation-icon {
+  margin-right: 10px;
+  color: #e65100;
+}
+
+.summary-section {
+  margin: 15px 0;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 5px;
+}
+
+.summary-section h4 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+.inflation-adjusted {
+  color: #e65100;
+  font-weight: 500;
+}
+
+.calculator-table td.inflation-adjusted {
+  color: #e65100;
+  font-weight: 500;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+.summary-item.highlight {
+  font-size: 1.1em;
+  padding-top: 8px;
+  border-top: 1px solid #ddd;
+}
